@@ -12,17 +12,17 @@ pipeline {
         timeout(time:1, unit: 'HOURS')
         disableConcurrentBuilds()
     }
-    parameters {
+    // parameters {
     //     string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
 
     //     text(name: 'BIOGRAPHY', defaultValue: '', description: 'Enter some information about the person')
 
-        booleanParam(name: 'Deploy', defaultValue: false, description: 'Toggle this value')
+        // booleanParam(name: 'Deploy', defaultValue: false, description: 'Toggle this value')
 
         // choice(name: 'CHOICE', choices: ['One', 'Two', 'Three'], description: 'Pick something')
 
         // password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
-    } 
+    // } 
 // build
     stages {
         stage('get the version') {
@@ -84,10 +84,10 @@ pipeline {
             }
         }
         stage('Deploy') {
-            when {
-                expression{
-                    params.Deploy == true
-                }
+            // when {
+            //     expression{
+            //         params.Deploy == true
+            //     }
             }
             steps {
                 script{
