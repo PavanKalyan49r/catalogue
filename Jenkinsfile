@@ -1,7 +1,7 @@
 pipeline {
     agent {
         node {
-            label 'AGENT1'
+            label 'AGENT-1'
         }
     }
     environment {
@@ -33,14 +33,20 @@ pipeline {
                 }
             }
         }
-        stage('Test') {
+        stage('Install Dependencies') {
             steps {
-                echo 'Testing..'
+                sh"""
+                    npm install
+                """
             }
         }
-        stage('Deploy') {
+        stage('Build') {
             steps {
-                echo 'Deploying....'
+                sh"""
+                    ls -la
+                    zip -q -r catalogue.zip ".git" -x "*.zip"
+                    ls -ltr
+                """
             }
         }
         
@@ -49,6 +55,7 @@ pipeline {
     post {
         always {
             echo 'I will always say hello again'
+            deleteDir()
         }
         failure {
             echo 'this runs when pipeline is failed, used generally to send some alerts'
